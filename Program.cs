@@ -8,6 +8,7 @@ using Restaurant_API.MiddleWares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Restaurant_API.Repositories.Auth;
+using Restaurant_API.Repositories.RMeal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RestaurantConnectionString")));
 
 // Scopes
+builder.Services.AddScoped<IMealRepository, SqlMealRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 // Mapping Part
