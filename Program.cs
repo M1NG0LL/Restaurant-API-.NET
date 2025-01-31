@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Restaurant_API.Repositories.Auth;
 using Restaurant_API.Repositories.RMeal;
+using Restaurant_API.Repositories.RDrink;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServ
 
 // Scopes
 builder.Services.AddScoped<IMealRepository, SqlMealRepository>();
+builder.Services.AddScoped<IDrinkRepository, SqlDrinkRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 // Mapping Part
