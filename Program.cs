@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Identity;
 using Restaurant_API.Repositories.Auth;
 using Restaurant_API.Repositories.RMeal;
 using Restaurant_API.Repositories.RDrink;
+using Restaurant_API.Repositories.RDessert;
+using Restaurant_API.Repositories.RSeat;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,13 +21,47 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
+// builder.Services.AddOpenApi();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Restaurant API", Version = "v1" });
+    options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = JwtBearerDefaults.AuthenticationScheme
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = JwtBearerDefaults.AuthenticationScheme
+                },
+                Scheme = "Oauth2",
+                Name = JwtBearerDefaults.AuthenticationScheme,
+                In = ParameterLocation.Header
+            },
+            new List<string>()
+        }
+    });
+});
 
 builder.Services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RestaurantConnectionString")));
+builder.Services.AddDbContext<RestaurantAuthDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RestaurantAuthConnectionString")));
 
 // Scopes
 builder.Services.AddScoped<IMealRepository, SqlMealRepository>();
 builder.Services.AddScoped<IDrinkRepository, SqlDrinkRepository>();
+builder.Services.AddScoped<IDessertRepository, SqlDessertRepository>();
+builder.Services.AddScoped<ISeatRepository, SqlSeatRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 // Mapping Part
@@ -67,7 +105,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    //app.MapOpenApi();
 }
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();

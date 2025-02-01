@@ -156,3 +156,7 @@ C:\Users\DELL\OneDrive\Desktop\C# APIs\Restaurant\Restaurant API\obj\Debug\net9.
 C:\Users\DELL\OneDrive\Desktop\C# APIs\Restaurant\Restaurant API\bin\Debug\net9.0\AutoMapper.dll
 C:\Users\DELL\OneDrive\Desktop\C# APIs\Restaurant\Restaurant API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\DELL\OneDrive\Desktop\C# APIs\Restaurant\Restaurant API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\DELL\OneDrive\Desktop\C# APIs\Restaurant\Restaurant API\obj\Debug\net9.0\Restaurant API.sourcelink.json
+C:\Users\DELL\OneDrive\Desktop\C# APIs\Restaurant\Restaurant API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\DELL\OneDrive\Desktop\C# APIs\Restaurant\Restaurant API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\DELL\OneDrive\Desktop\C# APIs\Restaurant\Restaurant API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
